@@ -1,8 +1,9 @@
 package models;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class Task extends ModeloBase{
 
@@ -90,5 +91,40 @@ public class Task extends ModeloBase{
                 ", create_time=" + create_time +
                 ", deadline=" + deadline +
                 '}';
+    }
+
+    public List<Task> getAllByUser(int iduser) {
+        List<Task> taskList = new ArrayList<>();
+        Task task = new Task();
+        Connection connection = task.getConnection();
+        String sql = "SELECT idtask,title,T0.description,create_date,deadline,status,T1.iduser,username,T2.idrol,T2.description as rol\n" +
+                "FROM task T0\n" +
+                "left join user T1 on T0.iduser = T1.iduser\n" +
+                "left join rol T2 on T1.idrol = T2.idrol WHERE T1.iduser=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,iduser);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                task.idtask=resultSet.getInt("idtask");
+                task.title=resultSet.getString("title");
+                task.description=resultSet.getString("description");
+                task.create_time=resultSet.getDate("create_date");
+                task.deadline=resultSet.getDate("deadline");
+                task.status=resultSet.getBoolean("status");
+                User user = new User();
+                user.setIduser(resultSet.getInt("iduser"));
+                user.setUsername(resultSet.getString("username"));
+                Rol rol = new Rol();
+                rol.setIdrol(resultSet.getInt("idrol"));
+                rol.setDescription(resultSet.getString("rol"));
+                user.setRol(rol);
+                task.setUser(user);
+                taskList.add(task);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return taskList;
     }
 }

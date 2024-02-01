@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938e2adc-6c73-4380-8320-86994825b58c" name="Changes" comment="login">
-      <change beforePath="$PROJECT_DIR$/src/models/ModeloBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ModeloBase.java" afterDir="false" />
-    </list>
+    <list default="true" id="938e2adc-6c73-4380-8320-86994825b58c" name="Changes" comment="app de Tomas" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
