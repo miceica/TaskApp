@@ -112,14 +112,17 @@ public class Task extends ModeloBase{
                 task.create_time=resultSet.getDate("create_date");
                 task.deadline=resultSet.getDate("deadline");
                 task.status=resultSet.getBoolean("status");
+
                 User user = new User();
                 user.setIduser(resultSet.getInt("iduser"));
                 user.setUsername(resultSet.getString("username"));
+
                 Rol rol = new Rol();
                 rol.setIdrol(resultSet.getInt("idrol"));
                 rol.setDescription(resultSet.getString("rol"));
+
                 user.setRol(rol);
-                task.setUser(user);
+                task.user = user;
                 taskList.add(task);
             }
         } catch (SQLException e) {

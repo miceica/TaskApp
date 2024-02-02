@@ -67,9 +67,11 @@ public class User extends ModeloBase {
             if (resultSet.next()) {
                 user.iduser = resultSet.getInt("iduser");
                 user.username = resultSet.getString("username");
+
                 Rol rol = new Rol();
                 rol.setIdrol(resultSet.getInt("idrol"));
                 rol.setDescription(resultSet.getString("description"));
+
                 user.rol = rol;
                 return user;
             } else {
