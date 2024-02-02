@@ -36,18 +36,28 @@ public class TaskController {
         return user.borrar("iduser=?", iduser);
     }
 
-    public boolean createTask(String title, String description, LocalDate deadline){
+    public boolean createTask(String title, String description, LocalDate deadline) {
         Task task = new Task();
-        return task.insertar("(title,description,deadline,iduser) values (?,?,?,?)", title,description,deadline,userLogged.getIduser());
+        return task.insertar("(title,description,deadline,iduser) values (?,?,?,?)", title, description, deadline, userLogged.getIduser());
     }
 
-    /*public List<Task> getAllTask(){
+    public List<Task> getAllTasks() {
         Task task = new Task();
         return task.getAll();
-    }*/
+    }
 
-    public List<Task> getAllTaskByUser(){
+    public List<Task> getAllTaskByUser() {
         Task task = new Task();
         return task.getAllByUser(userLogged.getIduser());
+    }
+
+    public boolean editTaskStatus(int idtask) {
+        Task task = new Task();
+        return task.actualizar("status=? where idtask=?", true, idtask);
+    }
+
+    public boolean deleteTask(int idtask) {
+        Task task = new Task();
+        return task.borrar("idtask=?", idtask);
     }
 }

@@ -51,15 +51,17 @@ public abstract class ModeloBase {
         sql = "delete from " + getNombreTabla() + " where " + sql;
         return ejecutarQuery(sql, parametros);
     }
+
     //Método que devuelve la conexion a la bbdd
-    public Connection getConnection(){
+    public Connection getConnection() {
         try {
-            Connection conexion=DriverManager.getConnection(URL,USUARIO,PASSWORD);
+            Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
             return conexion;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
     // Método genérico para ejecutar consultas SQL
     private boolean ejecutarQuery(String sql, Object... parametros) {
         try (Connection conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
@@ -71,9 +73,9 @@ public abstract class ModeloBase {
             }
 
             // Ejecutar la consulta
-            if(preparedStatement.executeUpdate()>0){
+            if (preparedStatement.executeUpdate() > 0) {
                 return true;
-            }else {
+            } else {
                 return false;
             }
 
